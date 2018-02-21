@@ -2,6 +2,7 @@ package i_introduction._7_Nullable_Types
 
 import util.TODO
 import util.doc7
+import javax.print.attribute.standard.NumberUp
 
 fun test() {
     val s: String = "this variable cannot store null references"
@@ -25,12 +26,13 @@ fun todoTask7(client: Client?, message: String?, mailer: Mailer): Nothing = TODO
 fun sendMessageToClient(
         client: Client?, message: String?, mailer: Mailer
 ) {
-    todoTask7(client, message, mailer)
+    if(client?.personalInfo?.email !=null && message!=null)
+    mailer?.sendMessage(client?.personalInfo?.email, message)
 }
 
 class Client (val personalInfo: PersonalInfo?)
 class PersonalInfo (val email: String?)
 
 interface Mailer {
-    fun sendMessage(email: String, message: String)
+    fun sendMessage(email: String?, message: String?)
 }
