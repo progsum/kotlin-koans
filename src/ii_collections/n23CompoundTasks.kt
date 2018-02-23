@@ -17,9 +17,10 @@ fun Shop.getNumberOfTimesProductWasOrdered(product: Product): Int {
     // Return the number of times the given product was ordered.
     // Note: a customer may order the same product for several times.
     // todoCollectionTask()
-    var count=0;
-    this.customers.forEach{c->c.orders.forEach{o->o.products.forEach{p->if(p.name.equals(product.name)) count++}}}
-    //println(this.customers.flatMap { c->c.orderedProducts }) //eats up dupes..?
-    //return this.customers.flatMap { c->c.orderedProducts }.count { p->p.name.equals(product.name) }
-    return count;
+    //var count=0;
+    //this.customers.forEach{c->c.orders.forEach{o->o.products.forEach{p->if(p.name.equals(product.name)) count++}}}
+    //return count;
+    return this.customers.stream().flatMap { c->c.orders.stream() }.flatMap { o->o.products.stream() }
+            .filter{p->p.name.equals(product.name)}.count().toInt()
+    //check scala, was much simpler there??
 }
