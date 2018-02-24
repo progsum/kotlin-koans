@@ -31,7 +31,9 @@ fun List<String>.partitionWordsAndLines(): Pair<List<String>, List<String>> {
 //private fun <E> List<E>.partitionTo(arrayList: Collection<E>, arrayList1: Collection<E>, function: (E) -> Boolean): Pair<Collection<E>,Collection<E>> {
 //private fun <E, F> Collection<E>.partitionTo(arrayList: F<E>, arrayList1: F<E>, function: (E) -> Boolean): Pair<F<E>,F<E>> {
 //private fun <E> Collection<E>.partitionTo(arrayList: Collection<E>, arrayList1: Collection<E>, function: (E) -> Boolean): Pair<out Collection<E>,out Collection<E>> {
-private fun <E> Collection<E>.partitionTo(arrayList: Collection<E>, arrayList1: Collection<E>, function: (E) -> Boolean): Pair<Collection<E>,Collection<E>> {
+//private fun <E> Collection<E>.partitionTo(arrayList: Collection<E>, arrayList1: Collection<E>, function: (E) -> Boolean): Pair<Collection<E>,Collection<E>> {
+//fun <T, C: MutableCollection<T>> Collection<T>.partitionTo(arrayList: C, arrayList1: C, function: (T) -> Boolean): Pair<C, C> {
+private fun <E, C: Collection<E>> Collection<E>.partitionTo(arrayList: C, arrayList1: C, function: (E) -> Boolean): Pair<C,C> {
     val pair= this.partition(function);
     pair.first.to(arrayList)
     pair.second.to(arrayList1)
