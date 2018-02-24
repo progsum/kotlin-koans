@@ -1,9 +1,18 @@
 package iv_properties
 
+import com.sun.org.apache.xpath.internal.operations.Bool
 import util.TODO
 
 class LazyProperty(val initializer: () -> Int) {
-    val lazy: Int = todoTask33()
+    private var initialized: Boolean = false
+    private var value: Int = 0;
+    val lazy: Int
+        get() = init()
+
+    private fun init(): Int {
+        if(!initialized){initialized=true; value=initializer();}
+        return value;
+    }
 }
 
 fun todoTask33(): Nothing = TODO(
