@@ -2,6 +2,8 @@ package vi_generics
 
 import util.TODO
 import java.util.*
+import java.util.function.Predicate
+import kotlin.collections.HashSet
 
 fun task41(): Nothing = TODO(
     """
@@ -20,11 +22,23 @@ fun task41(): Nothing = TODO(
 )
 
 fun List<String>.partitionWordsAndLines(): Pair<List<String>, List<String>> {
-    task41()
-//    return partitionTo(ArrayList<String>(), ArrayList()) { s -> !s.contains(" ") }
+//    task41()
+    return partitionTo(ArrayList<String>(), ArrayList<String>()) { s:String -> !s.contains(" ") }
+}
+
+//private fun <E, F> List<E>.partitionTo(arrayList: Collection<F>, arrayList1: Collection<F>, function: (E) -> Boolean): Pair<Collection<F>, Collection<F>> {
+//private fun <E> Collection<E>.partitionTo(arrayList: Collection<E>, arrayList1: Collection<E>, function: (E) -> Boolean): Pair<Collection<E>, Collection<E>> {
+//private fun <E> List<E>.partitionTo(arrayList: Collection<E>, arrayList1: Collection<E>, function: (E) -> Boolean): Pair<Collection<E>,Collection<E>> {
+//private fun <E, F> Collection<E>.partitionTo(arrayList: F<E>, arrayList1: F<E>, function: (E) -> Boolean): Pair<F<E>,F<E>> {
+//private fun <E> Collection<E>.partitionTo(arrayList: Collection<E>, arrayList1: Collection<E>, function: (E) -> Boolean): Pair<out Collection<E>,out Collection<E>> {
+private fun <E> Collection<E>.partitionTo(arrayList: Collection<E>, arrayList1: Collection<E>, function: (E) -> Boolean): Pair<Collection<E>,Collection<E>> {
+    val pair= this.partition(function);
+    pair.first.to(arrayList)
+    pair.second.to(arrayList1)
+    return Pair(arrayList, arrayList1)
 }
 
 fun Set<Char>.partitionLettersAndOtherSymbols(): Pair<Set<Char>, Set<Char>> {
-    task41()
-//    return partitionTo(HashSet<Char>(), HashSet()) { c -> c in 'a'..'z' || c in 'A'..'Z'}
+//    task41()
+    return partitionTo(HashSet<Char>(), HashSet<Char>()) { c:Char -> c in 'a'..'z' || c in 'A'..'Z'}
 }
